@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
 # Create your models here.
 
 
@@ -40,3 +42,23 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question
+
+
+class CheckTest(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    test=models.ForeignKey(Test,on_delete=models.CASCADE)
+    finded_question = models.PositiveBigIntegerField(default=0)
+    user_passed = models.BooleanField(default=False)
+    persentage = models.PositiveBigIntegerField(default=0)
+
+    def __str__(self):
+        return "Test of"+str(self.student.username)
+    
+class CheckQuestion(models.Model):
+    checkTest = models.ForeignKey(CheckTest, on_delete= models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    given_answer = models.CharField(max_length=1, help_text="E.x: a ")
+    true_answer = models.CharField(max_length=1, help_text="E.x: a ")
+    is_true = models.BooleanField(default=False)
+
+    
