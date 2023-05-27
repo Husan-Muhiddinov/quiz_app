@@ -8,7 +8,7 @@ class TestForm(forms.ModelForm):
 
     def save(self, request, commit=True):
         test= self.instance
-        test.author = request.user
+        test.author = request.user    # Testni kim qo'shishini  bilishimiz uchun '"Save"' funksiyasini yozdik 
         super().save(commit)
         return test.id
     
@@ -20,6 +20,6 @@ class QuestionForm(forms.ModelForm):
 
     def save(self, test_id, commit=True):
         question=self.instance
-        question.test = Test.objects.get(id=test_id)
+        question.test = Test.objects.get(id=test_id)       # Qaysi test ga savol qo'shishimizni bilishimiz uchun '"Save"' funksiyasini yozdik 
         super().save(commit)
         return question

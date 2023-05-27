@@ -27,7 +27,7 @@
                 
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="">My profile</a>
+                  <a class="nav-link" href="{% url 'profile' request.user.id %}">My profile</a>
                 </li>
                 {% endif %}
             </ul>
@@ -40,26 +40,16 @@
                   <a href="{% url 'signup' %}" class="btn btn-primary">SignUp</a>
                   {% endif %}
                 </div>
-              </div>
+              <!-- </div> -->
           </div>
         </div>
     </nav>
     <!-- Navbar End -->
+  <div class="container">
    {% block content %}
      
    {% endblock content %}
-  
-    <div class="container">
-      {% if messages %}
-        <div style="z-index: 312;" class="shadow-sm position-fixed end-0 bottom-0 mt-4">
-          {% for message in messages  %}
-            <div style="width: 20rem; opacity:0.9 " class=" m-3 alert alert-{{message.tags}}" role="alert">
-               {{message}}
-            </div>
-            {% endfor %}
-        </div>
-      {% endif %}  
-    </div>  
+  </div>  
       
     <div class="footer m-5 mb-3 ">
         <center class="text-muted" >Muhiddinov Codes | 2023</center>

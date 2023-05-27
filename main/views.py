@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import *
+from .models import Test, CheckQuestion, CheckTest, Question
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.utils import timezone
@@ -10,10 +10,13 @@ def index(request):
     tests = Test.objects.all()
     return render(request, 'index.html', {'tests': tests})
 
+
+
 @login_required(login_url='login')
 def ready_to_test(request, test_id):
     test = get_object_or_404(Test, id = test_id)
     return render(request, 'ready_to_test.html', {'test':test})
+
 
 
 @login_required(login_url='login')
@@ -35,10 +38,14 @@ def test(request, test_id):
     else:
         return HttpResponse("Test not Found")
     
+
+
 @login_required(login_url='login')
 def checktest(request,checktest_id):
     checktest = get_object_or_404(CheckTest, id = checktest_id, student = request.user)
     return render(request, 'checktest.html', {'checktest':checktest})
+
+
 
 @login_required(login_url='login')
 def new_test(request):
@@ -49,7 +56,9 @@ def new_test(request):
             test_id=form.save(request)
             return redirect('new_question', test_id)
         return render(request, 'new_test.html',{'form':form})
-    
+
+
+
 @login_required(login_url='login')
 def new_question(request, test_id):
     test = get_object_or_404(Test, id=test_id)
@@ -60,7 +69,7 @@ def new_question(request, test_id):
             if form.is_valid:
                 form.save(test_id)
                 if form.cleaned_data['submit_and_exit']:   # submit_and_exit check(belgilangan) bo'lsa index sahifasiga chiqib ketadi
-                    return redirect('index')
+                    return redirect('index')               # submit_and_exit ni belgilamaguncha test qo'shish mumkin
                 return redirect('new_question', test_id)
         return render(request, 'new_question.html', {'form':form,'test':test})
     else:
