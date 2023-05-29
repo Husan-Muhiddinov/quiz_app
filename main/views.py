@@ -55,7 +55,7 @@ def new_test(request):
         if form.is_valid:
             test_id=form.save(request)
             return redirect('new_question', test_id)
-        return render(request, 'new_test.html',{'form':form})
+    return render(request, 'new_test.html',{'form':form})
 
 
 

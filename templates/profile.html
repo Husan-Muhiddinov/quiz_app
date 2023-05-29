@@ -30,7 +30,7 @@
                 <p>{{i.test.title}}</p>
                 <small class="d-inline">
                     <a href="{% url 'checktest' i.id %}">details  </a> | {{i.percentage}} % |
-                    <a href="{% url 'ready_to_test' i.test.id %}">tryagain</a>
+                    <a href="{% url 'ready_to_test' i.test.id %}">try again</a>
                 </small>
                 <hr>
                 {% endfor %}

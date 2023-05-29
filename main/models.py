@@ -55,7 +55,7 @@ class CheckTest(models.Model):
         return "Test of"+str(self.student.username)
     
 class CheckQuestion(models.Model):
-    checkTest = models.ForeignKey(CheckTest, on_delete= models.CASCADE)
+    checktest = models.ForeignKey(CheckTest, on_delete= models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     given_answer = models.CharField(max_length=1, help_text="E.x: a ", null=True)
     true_answer = models.CharField(max_length=1, help_text="E.x: a ", null=True)
@@ -64,13 +64,13 @@ class CheckQuestion(models.Model):
     
 @receiver(pre_save, sender=CheckQuestion)
 def check_answer(sender, instance, *args, **kwargs):
-    if instance.given_answer == instance.is_answer:
+    if instance.given_answer == instance.true_answer:
         instance.is_true = True
 
 @receiver(pre_save, sender=CheckTest)
 def check_test(sender, instance, *args, **kwargs):
     checktest = instance
-    check_test.finded_questions = CheckQuestion.objects.filter(check_test=check_test, is_true=True).count()
+    check_test.finded_questions = CheckQuestion.objects.filter(checktest=checktest, is_true=True).count()
     try:
         checktest.percentage = int(checktest.finded_questions)*100//CheckQuestion.objects.filter(checktest=checktest).count()
         if checktest.test.pass_percentage <=checktest.percentage:
