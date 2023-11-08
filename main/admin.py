@@ -8,6 +8,8 @@ class QuestionInline(admin.TabularInline):
 class TestAdmin(admin.ModelAdmin):
     inlines = [QuestionInline, ]
     list_display = ['title', 'author']
+    list_filter = ['title']
+    search_fields = ['title']
 
 admin.site.register([Category, Question])
 admin.site.register(Test, TestAdmin)

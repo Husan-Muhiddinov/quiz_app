@@ -46,7 +46,6 @@ def checktest(request,checktest_id):
     return render(request, 'checktest.html', {'checktest':checktest})
 
 
-
 @login_required(login_url='login')
 def new_test(request):
     form=TestForm()
@@ -74,3 +73,6 @@ def new_question(request, test_id):
         return render(request, 'new_question.html', {'form':form,'test':test})
     else:
         return HttpResponse("Something Went Wrong!!!")
+    
+
+    # 1. Filter    2) @property   3) cleaned_data     # urlga boshqa nom yozsa 
