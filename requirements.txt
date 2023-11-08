@@ -1,5 +1,12 @@
+asgiref==3.6.0
+crispy-bootstrap4
 dj-database-url==2.1.0
 Django
-django-environ==0.11.2
-gunicorn==21.2.0
+django-crispy-forms
+django-environ
+gunicorn
+packaging==23.2
 psycopg2-binary==2.9.9
+sqlparse==0.4.3
+typing_extensions==4.8.0
+tzdata==2022.7
